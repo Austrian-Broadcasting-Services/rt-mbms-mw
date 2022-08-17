@@ -41,16 +41,17 @@ namespace MBMS_RT {
 
       std::string cdn_endpoint() const { return _cdn_endpoint + _playlist_path; };
     private:
-      void handle_playlist( const std::string& content, ItemSource source);
+      void handle_playlist( const std::string& content, ItemSource source, int idx = 0);
       void tick_handler();
 
       std::string _cdn_endpoint = "none";
       std::shared_ptr<CdnClient> _cdn_client;
       std::string _playlist_dir;
       std::string _playlist = "none";
+      std::string _playlist2 = "none";
       std::string _manifest;
 
-      std::map<int, std::shared_ptr<Segment>> _segments;
+      std::vector<std::map<int, std::shared_ptr<Segment>>> _segments;
       std::map<std::string, std::shared_ptr<LibFlute::File>> _flute_files;
       std::mutex _segments_mutex;
 
